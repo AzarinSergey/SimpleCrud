@@ -11,25 +11,29 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Projection", "Projection", 
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Api.Gateway", "Services\Api.Gateway\Api.Gateway.csproj", "{66B864EB-F4A3-4980-A6FB-C47E5DB4F203}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Person.Domain", "Services\Person\Person.Domain\Person.Domain.csproj", "{BC9F10B2-C2A7-4E79-BADF-A32A5F3502A3}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Person.Domain", "Services\Person\Person.Domain\Person.Domain.csproj", "{BC9F10B2-C2A7-4E79-BADF-A32A5F3502A3}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Person.Contract", "Services\Person\Person.Contract\Person.Contract.csproj", "{E19DCC72-177D-4375-B9EF-8A2841FCA02A}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Person.Model", "Services\Person\Person.Model\Person.Model.csproj", "{460BDF78-14D7-45AE-AA3E-AABAD02310ED}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Person.Model", "Services\Person\Person.Model\Person.Model.csproj", "{460BDF78-14D7-45AE-AA3E-AABAD02310ED}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Projection.Contract", "Services\Projection\Projection.Contract\Projection.Contract.csproj", "{395F3A5C-422A-4107-B595-9B8FBF81DC40}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Projection.Contract", "Services\Projection\Projection.Contract\Projection.Contract.csproj", "{395F3A5C-422A-4107-B595-9B8FBF81DC40}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Projection.Domain", "Services\Projection\Projection.Domain\Projection.Domain.csproj", "{346EC3E0-25FC-440F-9B27-170BBDF0C9DE}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Projection.Domain", "Services\Projection\Projection.Domain\Projection.Domain.csproj", "{346EC3E0-25FC-440F-9B27-170BBDF0C9DE}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Projection.Model", "Services\Projection\Projection.Model\Projection.Model.csproj", "{690297FF-9A56-4092-9336-B7BC9B6AFECF}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Projection.Model", "Services\Projection\Projection.Model\Projection.Model.csproj", "{690297FF-9A56-4092-9336-B7BC9B6AFECF}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = ".core", ".core", "{63A9FD73-13D6-4C91-98B5-D9D7A4127E6F}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Moedi.Cqrs", ".core\Moedi.Cqrs\Moedi.Cqrs.csproj", "{6538877C-8AF6-4480-AA4A-6D01AEEE5DEC}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Moedi.Cqrs", ".core\Moedi.Cqrs\Moedi.Cqrs.csproj", "{6538877C-8AF6-4480-AA4A-6D01AEEE5DEC}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Moedi.Cqrs.Messages", ".core\Moedi.Cqrs.Messages\Moedi.Cqrs.Messages.csproj", "{F74C2A8A-18E2-48DB-A58D-19414EACC035}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Moedi.Cqrs.Handler", ".core\Moedi.Cqrs.Handler\Moedi.Cqrs.Handler.csproj", "{08FBFD6D-B9D1-4BF0-A5EB-C77476516427}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Moedi.Cqrs.Handler", ".core\Moedi.Cqrs.Handler\Moedi.Cqrs.Handler.csproj", "{08FBFD6D-B9D1-4BF0-A5EB-C77476516427}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Moedi.Ef", ".core\Moedi.Ef\Moedi.Ef.csproj", "{7D718648-85F1-4F86-A331-A97DBECC9F67}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Moedi.Core", ".core\Moedi.Core\Moedi.Core.csproj", "{E01D2D23-7B9B-4714-AA63-E4C85FBD718C}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -77,6 +81,14 @@ Global
 		{08FBFD6D-B9D1-4BF0-A5EB-C77476516427}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{08FBFD6D-B9D1-4BF0-A5EB-C77476516427}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{08FBFD6D-B9D1-4BF0-A5EB-C77476516427}.Release|Any CPU.Build.0 = Release|Any CPU
+		{7D718648-85F1-4F86-A331-A97DBECC9F67}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{7D718648-85F1-4F86-A331-A97DBECC9F67}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{7D718648-85F1-4F86-A331-A97DBECC9F67}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{7D718648-85F1-4F86-A331-A97DBECC9F67}.Release|Any CPU.Build.0 = Release|Any CPU
+		{E01D2D23-7B9B-4714-AA63-E4C85FBD718C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{E01D2D23-7B9B-4714-AA63-E4C85FBD718C}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{E01D2D23-7B9B-4714-AA63-E4C85FBD718C}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{E01D2D23-7B9B-4714-AA63-E4C85FBD718C}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -92,6 +104,8 @@ Global
 		{6538877C-8AF6-4480-AA4A-6D01AEEE5DEC} = {63A9FD73-13D6-4C91-98B5-D9D7A4127E6F}
 		{F74C2A8A-18E2-48DB-A58D-19414EACC035} = {63A9FD73-13D6-4C91-98B5-D9D7A4127E6F}
 		{08FBFD6D-B9D1-4BF0-A5EB-C77476516427} = {63A9FD73-13D6-4C91-98B5-D9D7A4127E6F}
+		{7D718648-85F1-4F86-A331-A97DBECC9F67} = {63A9FD73-13D6-4C91-98B5-D9D7A4127E6F}
+		{E01D2D23-7B9B-4714-AA63-E4C85FBD718C} = {63A9FD73-13D6-4C91-98B5-D9D7A4127E6F}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {4994B291-2331-4220-9C46-54732A892A1D}

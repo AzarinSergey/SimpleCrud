@@ -1,6 +1,10 @@
 ﻿namespace Moedi.Cqrs
 {
-    public class CommandProcessor
+    public class CommandProcessor<TCommand>
     {
+        public CommandProcessor()
+        {
+            
+        }
     }
 }
