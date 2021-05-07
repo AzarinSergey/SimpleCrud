@@ -1,6 +1,6 @@
-﻿using Moedi.Cqrs.Messages;
-using System.Threading;
+﻿using System.Threading;
 using System.Threading.Tasks;
+using Moedi.Cqrs.Messages;
 
 namespace Moedi.Cqrs.Handler
 {

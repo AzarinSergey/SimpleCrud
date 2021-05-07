@@ -2,7 +2,6 @@
 using Microsoft.EntityFrameworkCore.Storage;
 using Moedi.Core.Interfaces.Data.Access;
 using System.Threading;
-using Moedi.Core.Interfaces;
 
 namespace Moedi.Ef
 {
@@ -10,8 +9,8 @@ namespace Moedi.Ef
         where TContext : MoediDbContext
     {
         private readonly TContext _dbContext;
-        private CancellationToken _token;
-        private IDbContextTransaction _transaction;
+        private readonly CancellationToken _token;
+        private readonly IDbContextTransaction _transaction;
 
         public UnitOfWork(TContext dbContext, bool transaction, CancellationToken token)
         {
@@ -47,12 +46,12 @@ namespace Moedi.Ef
 
         ICommandRepository<TEntity> ICommandRepositoryFactory.GetRepository<TEntity>()
         {
-            throw new System.NotImplementedException();
+            return new Repository<TEntity>(_dbContext, _token);
         }
 
         IQueryRepository<TEntity> IQueryRepositoryFactory.GetRepository<TEntity>()
         {
-            throw new System.NotImplementedException();
+            return new Repository<TEntity>(_dbContext, _token);
         }
     }
 }
