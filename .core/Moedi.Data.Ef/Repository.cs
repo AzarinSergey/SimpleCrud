@@ -1,13 +1,13 @@
-﻿using Moedi.Data.Core.Access;
-using Moedi.Data.Core.Entity;
-using System;
+﻿using System;
 using System.Linq;
 using System.Linq.Expressions;
 using System.Threading;
 using System.Threading.Tasks;
+using Moedi.Data.Core.Access;
+using Moedi.Data.Core.Entity;
 using Z.EntityFramework.Plus;
 
-namespace Moedi.Ef
+namespace Moedi.Data.Ef
 {
     public sealed class Repository<TEntity> : ICommandRepository<TEntity>
         where TEntity : class, IId

@@ -4,7 +4,7 @@ using System.Threading;
 using System.Threading.Tasks;
 using Microsoft.EntityFrameworkCore;
 
-namespace Moedi.Ef
+namespace Moedi.Data.Ef
 {
     public abstract class MoediDbContext : DbContext
     {

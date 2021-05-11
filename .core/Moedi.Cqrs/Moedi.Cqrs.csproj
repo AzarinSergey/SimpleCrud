@@ -10,8 +10,8 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\Moedi.Core\Moedi.Data.Core.csproj" />
     <ProjectReference Include="..\Moedi.Cqrs.Messages\Moedi.Cqrs.Messages.csproj" />
+    <ProjectReference Include="..\Moedi.Data.Core\Moedi.Data.Core.csproj" />
   </ItemGroup>
 
 </Project>

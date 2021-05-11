@@ -1,8 +1,8 @@
-﻿using Moedi.Data.Core.Access;
-using System;
+﻿using System;
 using System.Threading;
+using Moedi.Data.Core.Access;
 
-namespace Moedi.Ef
+namespace Moedi.Data.Ef
 {
     public class UowFactory<TDbContext> : IUowFactory
         where TDbContext : MoediDbContext, new()

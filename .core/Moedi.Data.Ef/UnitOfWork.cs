@@ -1,9 +1,9 @@
-﻿using Microsoft.EntityFrameworkCore;
+﻿using System.Threading;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Storage;
 using Moedi.Data.Core.Access;
-using System.Threading;
 
-namespace Moedi.Ef
+namespace Moedi.Data.Ef
 {
     public sealed class UnitOfWork<TContext> : IUow
         where TContext : MoediDbContext
