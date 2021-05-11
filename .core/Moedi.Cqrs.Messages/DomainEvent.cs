@@ -1,6 +1,6 @@
 ﻿namespace Moedi.Cqrs.Messages
 {
-    public abstract class DomainMessage
+    public abstract class DomainEvent
     {
     }
 }
