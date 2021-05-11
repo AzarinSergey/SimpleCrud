@@ -1,11 +1,10 @@
-﻿using Moedi.Core.Interfaces.Data.Access;
-using Moedi.Core.Interfaces.Data.Entity;
+﻿using Moedi.Data.Core.Access;
+using Moedi.Data.Core.Entity;
 using System;
 using System.Linq;
 using System.Linq.Expressions;
 using System.Threading;
 using System.Threading.Tasks;
-using Moedi.Core.Interfaces;
 using Z.EntityFramework.Plus;
 
 namespace Moedi.Ef

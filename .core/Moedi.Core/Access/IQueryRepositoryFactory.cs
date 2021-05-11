@@ -1,6 +1,6 @@
-﻿using Moedi.Core.Interfaces.Data.Entity;
+﻿using Moedi.Data.Core.Entity;
 
-namespace Moedi.Core.Interfaces.Data.Access
+namespace Moedi.Data.Core.Access
 {
     public interface IQueryRepositoryFactory
     {

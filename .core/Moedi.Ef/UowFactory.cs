@@ -1,7 +1,6 @@
-﻿using System;
+﻿using Moedi.Data.Core.Access;
+using System;
 using System.Threading;
-using Moedi.Core.Interfaces;
-using Moedi.Core.Interfaces.Data.Access;
 
 namespace Moedi.Ef
 {

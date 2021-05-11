@@ -1,8 +1,8 @@
-﻿using System.Threading;
+﻿using Microsoft.Extensions.Logging;
+using Moedi.Data.Core.Access;
+using Moedi.Data.Core.Entity;
+using System.Threading;
 using System.Threading.Tasks;
-using Microsoft.Extensions.Logging;
-using Moedi.Core.Interfaces.Data.Access;
-using Moedi.Core.Interfaces.Data.Entity;
 
 namespace Moedi.Cqrs.Handler
 {

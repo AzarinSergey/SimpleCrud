@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Threading;
 
-namespace Moedi.Core.Interfaces.Data.Access
+namespace Moedi.Data.Core.Access
 {
     public interface IUowFactory
     {

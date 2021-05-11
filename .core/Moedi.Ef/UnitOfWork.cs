@@ -1,6 +1,6 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Storage;
-using Moedi.Core.Interfaces.Data.Access;
+using Moedi.Data.Core.Access;
 using System.Threading;
 
 namespace Moedi.Ef

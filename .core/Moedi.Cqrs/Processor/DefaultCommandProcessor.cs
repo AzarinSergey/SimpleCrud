@@ -1,8 +1,7 @@
 ﻿using Microsoft.Extensions.Logging;
-using Moedi.Core.Interfaces.Cqrs;
-using Moedi.Core.Interfaces.Data.Access;
 using Moedi.Cqrs.Handler;
 using Moedi.Cqrs.Messages;
+using Moedi.Data.Core.Access;
 using System;
 using System.Threading;
 using System.Threading.Tasks;

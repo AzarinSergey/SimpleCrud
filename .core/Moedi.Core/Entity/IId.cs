@@ -1,4 +1,4 @@
-﻿namespace Moedi.Core.Interfaces.Data.Entity
+﻿namespace Moedi.Data.Core.Entity
 {
     public interface IId
     {

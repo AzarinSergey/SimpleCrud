@@ -1,9 +1,9 @@
-﻿using Moedi.Core.Interfaces.Data.Entity;
+﻿using Moedi.Data.Core.Entity;
 using System;
 using System.Linq.Expressions;
 using System.Threading.Tasks;
 
-namespace Moedi.Core.Interfaces.Data.Access
+namespace Moedi.Data.Core.Access
 {
     public interface ICommandRepository<TEntity> : IQueryRepository<TEntity>
          where TEntity : class, IId

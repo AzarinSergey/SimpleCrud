@@ -2,7 +2,7 @@
 using System.Threading.Tasks;
 using Moedi.Cqrs.Messages;
 
-namespace Moedi.Core.Interfaces.Cqrs
+namespace Moedi.Cqrs
 {
     public interface ICommandProcessor<TCommand>
         where TCommand : DomainMessage

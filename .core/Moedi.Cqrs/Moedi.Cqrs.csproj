@@ -6,10 +6,11 @@
 
   <ItemGroup>
     <PackageReference Include="FluentValidation" Version="10.1.0" />
+    <PackageReference Include="Microsoft.Extensions.Logging.Abstractions" Version="5.0.0" />
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\Moedi.Core\Moedi.Core.csproj" />
+    <ProjectReference Include="..\Moedi.Core\Moedi.Data.Core.csproj" />
     <ProjectReference Include="..\Moedi.Cqrs.Messages\Moedi.Cqrs.Messages.csproj" />
   </ItemGroup>
 

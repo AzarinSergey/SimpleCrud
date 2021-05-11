@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace Moedi.Core.Interfaces.Data.Access
+namespace Moedi.Data.Core.Access
 {
     public interface IUow : IDisposable,
         ICommandRepositoryFactory,

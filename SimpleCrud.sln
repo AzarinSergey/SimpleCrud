@@ -29,9 +29,9 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Moedi.Cqrs", ".core\Moedi.C
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Moedi.Cqrs.Messages", ".core\Moedi.Cqrs.Messages\Moedi.Cqrs.Messages.csproj", "{F74C2A8A-18E2-48DB-A58D-19414EACC035}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Moedi.Ef", ".core\Moedi.Ef\Moedi.Ef.csproj", "{7D718648-85F1-4F86-A331-A97DBECC9F67}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Moedi.Ef", ".core\Moedi.Ef\Moedi.Ef.csproj", "{7D718648-85F1-4F86-A331-A97DBECC9F67}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Moedi.Core", ".core\Moedi.Core\Moedi.Core.csproj", "{E01D2D23-7B9B-4714-AA63-E4C85FBD718C}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Moedi.Data.Core", ".core\Moedi.Core\Moedi.Data.Core.csproj", "{E01D2D23-7B9B-4714-AA63-E4C85FBD718C}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

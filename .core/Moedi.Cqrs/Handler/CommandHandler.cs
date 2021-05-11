@@ -1,10 +1,10 @@
-﻿using System.Collections.Generic;
+﻿using Microsoft.Extensions.Logging;
+using Moedi.Cqrs.Messages;
+using Moedi.Data.Core.Access;
+using Moedi.Data.Core.Entity;
+using System.Collections.Generic;
 using System.Threading;
 using System.Threading.Tasks;
-using Microsoft.Extensions.Logging;
-using Moedi.Core.Interfaces.Data.Access;
-using Moedi.Core.Interfaces.Data.Entity;
-using Moedi.Cqrs.Messages;
 
 namespace Moedi.Cqrs.Handler
 {

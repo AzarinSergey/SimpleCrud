@@ -1,7 +1,7 @@
-﻿using Moedi.Core.Interfaces.Data.Entity;
-using System.Linq;
+﻿using System.Linq;
+using Moedi.Data.Core.Entity;
 
-namespace Moedi.Core.Interfaces.Data.Access
+namespace Moedi.Data.Core.Access
 {
     public interface IQueryRepository<TEntity>
         where TEntity : class, IId
