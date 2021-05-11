@@ -20,7 +20,6 @@ namespace Moedi.Cqrs.Processor
         private TDomainMessage _domainMessage;
         private IValidator<TDomainMessage> _validator;
         private bool _useTransaction;
-        private ICommandProcessor<TDomainMessage> _processor;
 
         public CommandProcessorBuilder(CrossContext ctx, IUowFactory uowFactory,
             ILoggerFactory loggerFactory)
@@ -48,12 +47,6 @@ namespace Moedi.Cqrs.Processor
             return this;
         }
 
-        public CommandProcessorBuilder<TDomainMessage> UseProcessor(ICommandProcessor<TDomainMessage> processor)
-        {
-            _processor = processor;
-            return this;
-        }
-
         public Task Run(Func<CommandHandler<TDomainMessage>> handlerBuilder, CancellationToken token)
             => PrepareProcessor(handlerBuilder)
                 .Process(_domainMessage, _ctx, token);
@@ -76,9 +69,9 @@ namespace Moedi.Cqrs.Processor
                     throw new ValidationException(vResult.Errors);
             }
 
-            _processor ??= new DefaultCommandProcessor<TDomainMessage>(handlerBuilder, _loggerFactory, _uowFactory);
-            _processor.UseTransaction = _useTransaction;
-            return _processor;
+            var processor = new DefaultCommandProcessor<TDomainMessage>(handlerBuilder, _loggerFactory, _uowFactory);
+            processor.UseTransaction = _useTransaction;
+            return processor;
         }
     }
 }
