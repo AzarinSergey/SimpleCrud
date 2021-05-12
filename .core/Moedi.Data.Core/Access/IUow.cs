@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Threading.Tasks;
 
 namespace Moedi.Data.Core.Access
 {
@@ -6,7 +7,7 @@ namespace Moedi.Data.Core.Access
         ICommandRepositoryFactory,
         IQueryRepositoryFactory
     {
-        void Commit();
-        void Rollback();
+        Task Commit();
+        Task Rollback();
     }
 }

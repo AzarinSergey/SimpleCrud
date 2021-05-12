@@ -1,4 +1,5 @@
 ﻿using System.Threading;
+using System.Threading.Tasks;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Storage;
 using Moedi.Data.Core.Access;
@@ -28,14 +29,14 @@ namespace Moedi.Data.Ef
             }
         }
 
-        void IUow.Commit()
+        Task IUow.Commit()
         {
-            _transaction?.Commit();
+            return _transaction?.CommitAsync(_token);
         }
 
-        void IUow.Rollback()
+        Task IUow.Rollback()
         {
-            _transaction?.Rollback();
+            return _transaction?.RollbackAsync(_token);
         }
 
         public void Dispose()

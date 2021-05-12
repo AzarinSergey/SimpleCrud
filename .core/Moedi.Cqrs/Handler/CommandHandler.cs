@@ -30,11 +30,9 @@ namespace Moedi.Cqrs.Handler
 
         internal List<DomainEvent> EventList;
 
-        protected void Raise(DomainEvent e)
-            => EventList.Add(e);
+        protected void AddEvent(DomainEvent e) => EventList.Add(e);
 
-        protected void Raise(IEnumerable<DomainEvent> e)
-            => EventList.AddRange(e);
+        protected void AddEvents(IEnumerable<DomainEvent> e) => EventList.AddRange(e);
 
         public abstract Task Execute(TCommand command, CancellationToken token);
     }
