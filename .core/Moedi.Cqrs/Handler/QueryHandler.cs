@@ -8,11 +8,12 @@ namespace Moedi.Cqrs.Handler
 {
     public abstract class QueryHandler<TResult>
     {
-        internal IQueryRepositoryFactory Uow { get; set; }
-
-        internal ILogger Logger { get; set; }
+        internal IQueryRepositoryFactory Uow;
+        internal ILogger Logger;
 
         protected ILogger UseLogger => Logger;
+
+        protected IQueryRepositoryFactory RepositoryFactory => Uow;
 
         protected IQueryRepository<T> GetRepository<T>()
             where T : class, IId

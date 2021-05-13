@@ -12,8 +12,8 @@ namespace Moedi.Data.Ef
     public sealed class Repository<TEntity> : ICommandRepository<TEntity>
         where TEntity : class, IId
     {
-        private MoediDbContext _context;
-        private CancellationToken _token;
+        private readonly MoediDbContext _context;
+        private readonly CancellationToken _token;
 
         public Repository(MoediDbContext context, CancellationToken token)
         {

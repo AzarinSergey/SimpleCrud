@@ -4,4 +4,8 @@
     <TargetFramework>netcoreapp3.1</TargetFramework>
   </PropertyGroup>
 
+  <ItemGroup>
+    <ProjectReference Include="..\..\..\.cmn\Cmn.Models\Cmn.Models.csproj" />
+  </ItemGroup>
+
 </Project>

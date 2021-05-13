@@ -1,6 +1,6 @@
 ﻿namespace Projection.Contract.Models
 {
-    public class PersonPrj
+    public class SearchPersonResultPrj
     {
         public string FirstName { get; set; }
         public string LastName { get; set; }

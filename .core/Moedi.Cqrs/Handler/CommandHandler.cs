@@ -11,11 +11,12 @@ namespace Moedi.Cqrs.Handler
     public abstract class CommandHandler<TCommand>
         where TCommand : DomainMessage
     {
-        internal ICommandRepositoryFactory Uow { get; set; }
-
-        internal ILogger Logger { get; set; }
+        internal ICommandRepositoryFactory Uow;
+        internal ILogger Logger;
 
         protected ILogger UseLogger => Logger;
+
+        protected ICommandRepositoryFactory RepositoryFactory => Uow;
 
         protected CommandHandler()
         {
