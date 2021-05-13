@@ -32,6 +32,13 @@ namespace Moedi.Data.Ef
             return entity.Id;
         }
 
+        public async Task Update(Expression<Func<TEntity, bool>> condition,
+            Expression<Func<TEntity, TEntity>> updateExpression)
+        {
+            await _context.Set<TEntity>().Where(condition).UpdateAsync(updateExpression, _token);
+            await _context.SaveChangesAsync(_token);
+        }
+
         public async Task<int> DeleteAsync(Expression<Func<TEntity, bool>> condition)
         {
             var removedCount = await _context.Set<TEntity>().Where(condition).DeleteAsync(_token);

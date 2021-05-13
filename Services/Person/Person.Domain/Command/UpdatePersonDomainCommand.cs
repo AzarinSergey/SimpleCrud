@@ -2,8 +2,9 @@
 
 namespace Person.Domain.Command
 {
-    public class CreatePersonDomainCommand : DomainMessage
+    public class UpdatePersonDomainCommand : DomainMessage
     {
+        public int Id { get; set; }
         public string FirstName { get; set; }
         public string LastName { get; set; }
         public string StreetAddress { get; set; }

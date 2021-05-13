@@ -10,6 +10,9 @@ namespace Moedi.Data.Core.Access
     {
         Task<int> CreateOrUpdateAsync(TEntity entity);
 
+        Task Update(Expression<Func<TEntity, bool>> condition,
+            Expression<Func<TEntity, TEntity>> updateExpression);
+
         Task<int> DeleteAsync(Expression<Func<TEntity, bool>> condition);
     }
 }
