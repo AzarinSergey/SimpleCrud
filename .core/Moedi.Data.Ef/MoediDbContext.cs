@@ -33,5 +33,13 @@ namespace Moedi.Data.Ef
                 Validator.ValidateObject(entity, validationContext);
             }
         }
+
+        protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
+        {
+            optionsBuilder.UseSqlServer(x =>
+            {
+                x.MigrationsHistoryTable("__EFMigrationsHistory", Schema);
+            });
+        }
     }
 }
