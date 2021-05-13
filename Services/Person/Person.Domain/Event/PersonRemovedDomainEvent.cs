@@ -1,6 +1,8 @@
-﻿namespace Projection.Contract.Models
+﻿using Moedi.Cqrs.Messages;
+
+namespace Person.Domain.Event
 {
-    public class SearchPersonResultPrj
+    public class PersonRemovedDomainEvent : DomainEvent
     {
         public int Id { get; set; }
         public string FirstName { get; set; }

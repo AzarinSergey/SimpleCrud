@@ -4,4 +4,8 @@
     <TargetFramework>netcoreapp3.1</TargetFramework>
   </PropertyGroup>
 
+  <ItemGroup>
+    <ProjectReference Include="..\..\..\.core\Moedi.Cqrs.Messages\Moedi.Cqrs.Messages.csproj" />
+  </ItemGroup>
+
 </Project>

@@ -1,4 +1,5 @@
-﻿using System.Linq;
+﻿using System.Collections.Generic;
+using System.Linq;
 using Cmn.Models;
 using Moedi.Cqrs.Handler;
 using Projection.Domain.Model;
@@ -9,7 +10,7 @@ using Microsoft.EntityFrameworkCore;
 
 namespace Projection.Domain.Query
 {
-    public class SearchPersonFilterQuery : QueryHandler<PagedResult<SearchPersonResult>>
+    public class SearchPersonFilterQuery : QueryHandler<SearchPersonResult>
     {
         private readonly SearchPersonFilter _filter;
 
@@ -18,15 +19,14 @@ namespace Projection.Domain.Query
             _filter = filter;
         }
 
-        public override async Task<PagedResult<SearchPersonResult>> Query(CancellationToken token)
+        public override async Task<SearchPersonResult> Query(CancellationToken token)
         {
             _filter.NormalizePagination();
 
             var query = _filter.GetQuery(RepositoryFactory);
 
-            var totalCount = await query.CountAsync(token);
-            var result = await query
-                .Select(x => new SearchPersonResult
+            var result = await query.Query
+                .Select(x => new SearchPersonResultItem
                 {
                     Id = x.Id,
                     LastName = x.LastName,
@@ -35,11 +35,17 @@ namespace Projection.Domain.Query
                     Email = x.Email,
                     StreetAddress = x.StreetAddress,
                     City = x.City,
-                    ZipCode = x.ZipCode
+                    ZipCode = x.ZipCode,
                 })
                 .ToListAsync(token);
 
-            return new PagedResult<SearchPersonResult>(_filter.PageSize, _filter.PageNumber, totalCount, result);
+            return new SearchPersonResult
+            {
+                Items = result,
+                PageNumber = query.PageNumber,
+                PageSize = query.PageSize,
+                TotalCount = query.TotalCount
+            };
         }
     }
 }

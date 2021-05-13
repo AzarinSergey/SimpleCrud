@@ -8,9 +8,9 @@ namespace Moedi.Cqrs
 {
     public interface IProcessorFactory
     {
-        CommandProcessorBuilder<TDomainMessage> ForCommand<TDomainMessage>(IntegrationMessage command)
+        CommandProcessorBuilder<TDomainMessage> Command<TDomainMessage>(object model, CrossContext ctx)
             where TDomainMessage : DomainMessage;
 
-        Task<T> ForQuery<T>(CrossContext ctx, CancellationToken token, QueryHandler<T> handler);
+        Task<T> Query<T>(CrossContext ctx, CancellationToken token, QueryHandler<T> handler);
     }
 }

@@ -9,7 +9,7 @@ namespace Projection.Domain.SearchFilter.Implementations
 {
     public static class SearchPersonFilterImplementation
     {
-        public static IQueryable<Person.Model.Entity.Person> GetQuery(this SearchPersonFilter filter, IQueryRepositoryFactory factory)
+        public static FilterQuery<Person.Model.Entity.Person> GetQuery(this SearchPersonFilter filter, IQueryRepositoryFactory factory)
         {
             var personQuery = factory.GetRepository<Person.Model.Entity.Person>().Query();
             var criteria = GetCriterias(filter).Where(x => x != null);
@@ -22,21 +22,28 @@ namespace Projection.Domain.SearchFilter.Implementations
                               select query;
             }
 
-            //это плохо
+            //это не очень хорошо
             personQuery = personQuery.Distinct();
 
-            return personQuery
-                .GenericSort(filter.SortBy, persons => persons.OrderBy(x => x.Id))
-                .Skip(filter.PageSize * (filter.PageNumber - 1))
-                .Take(filter.PageSize);
+            return new FilterQuery<Person.Model.Entity.Person> 
+            { 
+                Query = personQuery
+                    .GenericSort(filter.SortBy, persons => persons.OrderBy(x => x.Id))
+                    .Skip(filter.PageSize * (filter.PageNumber - 1))
+                    .Take(filter.PageSize),
+
+                PageNumber = filter.PageNumber,
+                PageSize = filter.PageSize,
+                TotalCount = personQuery.Count()
+            };
         }
 
         private static IEnumerable<ISearchCriteria> GetCriterias(SearchPersonFilter filter)
         {
             yield return filter.City.MapString(city => new PersonExpressionCriteria(p => p.City.Contains(city)));
             yield return filter.ZipCode.MapString(zipCode => new PersonExpressionCriteria(p => p.ZipCode.Contains(zipCode)));
-            yield return filter.FirstName.MapString(fName => new PersonExpressionCriteria(p => p.City.Contains(fName)));
-            yield return filter.Phone.MapString(phone => new PersonExpressionCriteria(p => p.City.Contains(phone)));
+            yield return filter.FirstName.MapString(fName => new PersonExpressionCriteria(p => p.FirstName.Contains(fName)));
+            yield return filter.Phone.MapString(phone => new PersonExpressionCriteria(p => p.PhoneNumber.Contains(phone)));
         }
 
         public static void NormalizePagination(this SearchPersonFilter filter)

@@ -19,16 +19,15 @@ namespace Moedi.Cqrs.Processor
             _loggerFactory = loggerFactory;
         }
 
-        public CommandProcessorBuilder<TDomainMessage> ForCommand<TDomainMessage>(IntegrationMessage command)
-            where TDomainMessage : DomainMessage
+        public CommandProcessorBuilder<TDomainMessage> Command<TDomainMessage>(object model, CrossContext ctx) where TDomainMessage : DomainMessage
         {
-            _loggerFactory.CreateLogger($"ProcessorFactory[{command.CrossContext.CorrelationUuid}]")
-                .LogInformation($"Prepare command processing for '{nameof(command)}'");
+            _loggerFactory.CreateLogger($"ProcessorFactory[{ctx.CorrelationUuid}]")
+                .LogInformation($"Prepare processing for '{nameof(model)}'");
 
-            return new CommandProcessorBuilder<TDomainMessage>(command.CrossContext, _uowFactory, _loggerFactory);
+            return new CommandProcessorBuilder<TDomainMessage>(ctx, _uowFactory, _loggerFactory);
         }
 
-        public async Task<T> ForQuery<T>(CrossContext ctx, CancellationToken token, QueryHandler<T> handler)
+        public async Task<T> Query<T>(CrossContext ctx, CancellationToken token, QueryHandler<T> handler)
         {
             var logger = _loggerFactory.CreateLogger($"QueryProcessor[{nameof(handler)}][{ctx.CorrelationUuid}]");
             logger.LogInformation($"Started at {DateTime.Now}");

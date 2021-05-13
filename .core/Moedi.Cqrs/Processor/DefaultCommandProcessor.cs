@@ -24,7 +24,10 @@ namespace Moedi.Cqrs.Processor
 
         public bool UseTransaction { get; set; }
 
-        public async Task Process(TCommand command, CrossContext ctx, CancellationToken token)
+        public Task Process(TCommand command, CrossContext ctx, CancellationToken token)
+            => ProcessWithEvents(command, ctx, token);
+
+        public async Task<DomainEvent[]> ProcessWithEvents(TCommand command, CrossContext ctx, CancellationToken token)
         {
             var logger = _loggerFactory.CreateLogger($"CommandProcessor[{nameof(command)}][{ctx.CorrelationUuid}]");
             IUow uow = null;
@@ -32,7 +35,7 @@ namespace Moedi.Cqrs.Processor
             {
                 logger.LogInformation($"Started at {DateTime.Now}");
                 var handler = _handlerBuilder();
-                var transactionUuid = UseTransaction ? Guid.NewGuid() : (Guid?) null;
+                var transactionUuid = UseTransaction ? Guid.NewGuid() : (Guid?)null;
                 uow = _uowfactory.CreateUnitOfWork(transactionUuid, token);
                 handler.Uow = uow;
                 handler.Logger = _loggerFactory.CreateLogger(nameof(handler));
@@ -40,30 +43,26 @@ namespace Moedi.Cqrs.Processor
                 await handler.Execute(command, token);
 
                 await uow.Commit();
+
+                return handler.EventList.ToArray();
             }
             catch (Exception e)
             {
+                var t = uow?.Rollback();
+                if (t != null)
+                    await t;
+
                 logger.LogError("{0}\n{1}", e.Message, e.StackTrace);
+                throw;
             }
             finally
             {
-                var t = uow?.Rollback();
-                if (t != null) 
-                    await t;
+                
 
                 uow?.Dispose();
 
                 logger.LogInformation($"Done at {DateTime.Now}");
             }
-        }
-
-        public Task<DomainEvent[]> ProcessWithEvents(TCommand command, CrossContext ctx, CancellationToken token)
-        {
-            var handler = _handlerBuilder();
-            handler.Uow = _uowfactory.CreateUnitOfWork(null);
-            handler.Logger = _loggerFactory.CreateLogger(nameof(handler));
-            
-            return Task.FromResult(handler.EventList.ToArray());
         }
     }
 }

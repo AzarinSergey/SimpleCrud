@@ -4,5 +4,24 @@
     <TargetFramework>netcoreapp3.1</TargetFramework>
   </PropertyGroup>
 
+  <ItemGroup>
+    <PackageReference Include="AutoMapper" Version="10.1.1" />
+    <PackageReference Include="AutoMapper.Extensions.Microsoft.DependencyInjection" Version="8.1.1" />
+    <PackageReference Include="Swashbuckle.AspNetCore" Version="6.1.4" />
+  </ItemGroup>
+
+	<PropertyGroup>
+		<GenerateDocumentationFile>true</GenerateDocumentationFile>
+		<NoWarn>$(NoWarn);1591</NoWarn>
+	</PropertyGroup>
+
+	<ItemGroup>
+    <ProjectReference Include="..\Person\Person.Contract\Person.Contract.csproj" />
+    <ProjectReference Include="..\Person\Person.Implementation.Monolithic\Person.Implementation.Monolithic.csproj" />
+    <ProjectReference Include="..\Person\Person.Model\Person.Model.csproj" />
+    <ProjectReference Include="..\Projection\Projection.Contract\Projection.Contract.csproj" />
+    <ProjectReference Include="..\Projection\Projection.Implementation.Monolithic\Projection.Implementation.Monolithic.csproj" />
+  </ItemGroup>
+
 
 </Project>

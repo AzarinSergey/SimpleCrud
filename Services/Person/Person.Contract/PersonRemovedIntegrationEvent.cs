@@ -1,6 +1,6 @@
-﻿namespace Projection.Contract.Models
+﻿namespace Person.Contract
 {
-    public class SearchPersonResultPrj
+    public class PersonRemovedIntegrationEvent
     {
         public int Id { get; set; }
         public string FirstName { get; set; }

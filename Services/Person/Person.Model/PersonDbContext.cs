@@ -6,6 +6,7 @@ namespace Person.Model
 {
     public class PersonDbContext : MoediDbContext
     {
+        protected override string ConnectionName => "SqlConnection";
         protected override string Schema => "Person";
 
         public DbSet<Entity.Person> Person { get; set; }
@@ -22,7 +23,7 @@ namespace Person.Model
             //connection string for migrations only 
             //dotnet-ef migrations add Initial --context PersonDbContext
             //dotnet-ef database update
-            optionsBuilder.UseSqlServer("data source=(local)\\SQL2016;initial catalog=SimpleCrud;trusted_connection=true;");
+            //optionsBuilder.UseSqlServer("data source=(local)\\SQL2016;initial catalog=SimpleCrud;trusted_connection=true;");
 
             base.OnConfiguring(optionsBuilder);
         }

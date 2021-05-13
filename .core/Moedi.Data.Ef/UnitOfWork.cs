@@ -29,14 +29,16 @@ namespace Moedi.Data.Ef
             }
         }
 
-        Task IUow.Commit()
+        async Task IUow.Commit()
         {
-            return _transaction?.CommitAsync(_token);
+            if(_transaction != null)
+                await _transaction.CommitAsync(_token);
         }
 
-        Task IUow.Rollback()
+        async Task IUow.Rollback()
         {
-            return _transaction?.RollbackAsync(_token);
+            if (_transaction != null)
+                await _transaction.RollbackAsync(_token);
         }
 
         public void Dispose()

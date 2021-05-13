@@ -6,7 +6,7 @@ namespace Person.Domain.Validator
     {
         private const string PhonePattern = @"^7\d{10}$";
         private const string ZipCodePattern = @"^\d{5}(?:[-\s]\d{4})?$";
-        private const string EmailPattern = @"^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}+$";
+        private const string EmailPattern = @"^([\w\.\-]+)@([\w\-]+)((\.(\w){2,3})+)$";
 
         public static void ValidatePhoneNumber<T>(IRuleBuilderInitial<T, string> ruleBuilder)
         {

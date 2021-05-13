@@ -1,13 +1,17 @@
-﻿using System.ComponentModel.DataAnnotations;
+﻿using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.Configuration;
+using System;
+using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
-using Microsoft.EntityFrameworkCore;
 
 namespace Moedi.Data.Ef
 {
     public abstract class MoediDbContext : DbContext
     {
+        protected abstract string ConnectionName { get; }
+
         protected abstract string Schema { get; }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
@@ -40,6 +44,22 @@ namespace Moedi.Data.Ef
             {
                 x.MigrationsHistoryTable("__EFMigrationsHistory", Schema);
             });
+
+            var envName = Environment.GetEnvironmentVariable("ASPNETCORE_ENVIRONMENT");
+
+            var configuration = new ConfigurationBuilder()
+                .SetBasePath(AppDomain.CurrentDomain.BaseDirectory)
+                .AddJsonFile("appsettings.json", optional: true, reloadOnChange: true);
+
+            if (!string.IsNullOrEmpty(envName))
+            {
+                configuration
+                    .AddJsonFile($"appsettings.{envName}.json", optional: true, reloadOnChange: true);
+            }
+
+            var connectionString = configuration.Build().GetConnectionString(ConnectionName);
+
+            optionsBuilder.UseSqlServer(connectionString);
         }
     }
 }

@@ -1,15 +1,20 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using System;
+using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
+using Moedi.Cqrs.Messages;
 
 namespace Api.Gateway.Controllers
 {
+    [Route("api/[controller]/[action]")]
     [ApiController]
-    [Route("[controller]")]
     public abstract class ApiControllerBase : ControllerBase
     {
-        protected readonly ILogger<TestController> Logger;
+        protected readonly ILogger<ApiControllerBase> Logger;
 
-        protected ApiControllerBase(ILogger<TestController> logger)
+        private CrossContext _ctx;
+        protected CrossContext CrossContext => _ctx ??= new CrossContext { CorrelationUuid = Guid.NewGuid() };
+
+        protected ApiControllerBase(ILogger<ApiControllerBase> logger)
         {
             Logger = logger;
         }

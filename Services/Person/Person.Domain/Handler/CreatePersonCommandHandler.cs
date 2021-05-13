@@ -2,14 +2,15 @@
 using System.Threading.Tasks;
 using Moedi.Cqrs.Handler;
 using Person.Domain.Command;
+using Person.Domain.Event;
 
 namespace Person.Domain.Handler
 {
     public class CreatePersonCommandHandler : CommandHandler<CreatePersonDomainCommand>
     {
-        public override Task Execute(CreatePersonDomainCommand command, CancellationToken token)
+        public override async Task Execute(CreatePersonDomainCommand command, CancellationToken token)
         {
-            return GetRepository<Model.Entity.Person>()
+            var result = await GetRepository<Model.Entity.Person>()
                 .CreateOrUpdateAsync(new Model.Entity.Person
                 {
                     FirstName = command.FirstName,
@@ -20,6 +21,11 @@ namespace Person.Domain.Handler
                     LastName = command.LastName,
                     StreetAddress = command.StreetAddress
                 });
+
+            AddEvent(new PersonCreatedDomainEvent
+            {
+                PersonId = result
+            });
         }
     }
 }
