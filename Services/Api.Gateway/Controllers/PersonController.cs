@@ -1,5 +1,6 @@
 ﻿using System.Threading;
 using System.Threading.Tasks;
+using Core.Service.Host.Client.DynamicProxy;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
 using Person.Contract;
@@ -10,12 +11,12 @@ namespace Api.Gateway.Controllers
 {
     public class PersonController : ApiControllerBase
     {
-        private readonly IPersonService _personService;
+        private readonly ServiceProxy<IPersonService> _personService;
         private readonly IPersonProjection _personProjection;
 
-        public PersonController(ILogger<PersonController> logger, 
-            IPersonService personService, IPersonProjection personProjection
-            ) 
+        public PersonController(ILogger<PersonController> logger,
+            ServiceProxy<IPersonService> personService, 
+            IPersonProjection personProjection) 
             : base(logger)
         {
             _personService = personService;
@@ -63,7 +64,7 @@ namespace Api.Gateway.Controllers
         [HttpPost]
         public async Task<IActionResult> Create(CreatePersonCommandModel model, CancellationToken token)
         {
-            var result = await _personService.CreatePerson(model, CrossContext, token);
+            var result = await _personService.Call().CreatePerson(model, CrossContext, token);
             return Ok(result);
         }
 
@@ -77,7 +78,7 @@ namespace Api.Gateway.Controllers
         [HttpPost("{id}")]
         public async Task<IActionResult> Update(int id, CreatePersonCommandModel model, CancellationToken token)
         {
-            var result = await _personService.UpdatePerson(id, model, CrossContext, token);
+            var result = await _personService.Call().UpdatePerson(id, model, CrossContext, token);
 
             return Ok(result);
         }
@@ -91,7 +92,7 @@ namespace Api.Gateway.Controllers
         [HttpPost("{id}")]
         public async Task<IActionResult> Remove(int id, CancellationToken token)
         {
-            var result = await _personService.RemovePerson(id, CrossContext, token);
+            var result = await _personService.Call().RemovePerson(id, CrossContext, token);
 
             if (result == null)
                 return NotFound();

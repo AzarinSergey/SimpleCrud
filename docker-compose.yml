@@ -1,0 +1,19 @@
+version: '3.4'
+
+services:
+  api-gateway:
+    image: ${DOCKER_REGISTRY-}${APP_NAME}.api-gateway
+    build:
+      context: .
+      dockerfile: Services/Api.Gateway/Dockerfile
+      labels:
+        - app.name=${APP_NAME}
+
+  person-service:
+    image: ${DOCKER_REGISTRY-}${APP_NAME}.person-service
+    build:
+      context: .
+      dockerfile: Services/Person/Person.Implementation/Dockerfile
+      labels:
+        - app.name=${APP_NAME}
+

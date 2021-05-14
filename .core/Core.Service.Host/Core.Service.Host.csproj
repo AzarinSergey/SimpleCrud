@@ -16,6 +16,11 @@
   </ItemGroup>
 
   <ItemGroup>
+    <PackageReference Include="Swashbuckle.AspNetCore.SwaggerGen" Version="6.1.4" />
+    <PackageReference Include="Swashbuckle.AspNetCore.SwaggerUI" Version="6.1.4" />
+  </ItemGroup>
+
+  <ItemGroup>
     <ProjectReference Include="..\Core.Service.Host.Convention\Core.Service.Host.Convention.csproj" />
     <ProjectReference Include="..\Core.Service.Host.Interfaces\Core.Service.Interfaces.csproj" />
     <ProjectReference Include="..\Core.Tool\Core.Tool.csproj" />

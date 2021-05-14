@@ -2,14 +2,20 @@
 using Core.Service.Interfaces;
 using Microsoft.Extensions.DependencyInjection;
 using System;
+using Core.Service.Host.Convention.Configuration;
+using Microsoft.Extensions.Options;
 
 namespace Core.Service.Host.Client.ServiceCollectionExtensions
 {
     public static class InternalServiceRegistrator
     {
-        public static void RegisterInternalServiceProxy<T>(this IServiceCollection services, string serviceName)
+        public static void RegisterInternalServiceProxy<T>(this IServiceCollection services)
             where T : IInternalHttpService
         {
+            var sp = services.BuildServiceProvider();
+            var opt = sp.GetService<IOptions<ServiceSettings>>().Value;
+            var serviceName = opt.InternalServices[typeof(T).ToString()];
+
             services.AddHttpClient<ServiceProxy<T>>((provider, client) =>
             {
                 var hostEnvName = serviceName.ToUpperInvariant() + "_SERVICE_HOST";

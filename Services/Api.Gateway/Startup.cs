@@ -1,88 +1,59 @@
-using System;
-using System.IO;
-using System.Reflection;
+using Core.Service.Host;
+using Core.Service.Host.Client.ServiceCollectionExtensions;
 using Microsoft.AspNetCore.Builder;
-using Microsoft.AspNetCore.Hosting;
-using Microsoft.EntityFrameworkCore;
-using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
-using Microsoft.Extensions.Hosting;
 using Moedi.Cqrs;
 using Moedi.Cqrs.Processor;
 using Moedi.Data.Core.Access;
 using Moedi.Data.Ef;
 using Person.Contract;
-using Person.Implementation.Monolithic;
-using Person.Model;
 using Projection.Contract;
 using Projection.Domain;
 using Projection.Implementation.Monolithic;
-using AutoMapper;
+using System;
+using System.IO;
+using System.Reflection;
 
 namespace Api.Gateway
 {
-    public class Startup
+
+
+    public class Startup : StatelessServiceStartup
     {
         public Startup()
         {
-            var environmentName = Environment.GetEnvironmentVariable("ASPNETCORE_ENVIRONMENT");
+            ConfigureSwagger(
+            op =>
+            {
+                var xmlFile = $"{Assembly.GetExecutingAssembly().GetName().Name}.xml";
+                var xmlPath = Path.Combine(AppContext.BaseDirectory, xmlFile);
+                op.IncludeXmlComments(xmlPath);
+            },
+            (sp, op) =>
+            {
 
-            Configuration = new ConfigurationBuilder()
-                .SetBasePath(AppDomain.CurrentDomain.BaseDirectory)
-                .AddJsonFile($"appsettings.json", reloadOnChange: true, optional: false)
-                .AddJsonFile($"appsettings.{environmentName}.json", reloadOnChange: true, optional: true)
-                .AddEnvironmentVariables()
-                .Build();
-        }
+            },
+            (sp, op) =>
+            {
+                op.SwaggerEndpoint("/swagger/v1/swagger.json", "Simple CRUD Api");
+                op.RoutePrefix = "swagger";
+            });
+     }
 
-        public IConfiguration Configuration { get; }
-
-        public void ConfigureServices(IServiceCollection services)
+        protected override void RegisterStatelessService(IServiceCollection services)
         {
-            services.AddTransient<IProcessorFactory, ProcessorFactory>();
+            //Register PersonService
+            services.RegisterInternalServiceProxy<IPersonService>();
 
-            services.AddDbContextFactory<PersonDbContext, DbContextFactory<PersonDbContext>>();
-            services.AddSingleton<IUowFactory, UowFactory<PersonDbContext>>();
-            services.AddScoped<IPersonService, PersonService>();
+            //Register Projection
+            services.AddTransient<IProcessorFactory, ProcessorFactory>();
 
             services.AddDbContextFactory<ProjectionDbContext, DbContextFactory<ProjectionDbContext>>();
             services.AddSingleton<IUowFactory, UowFactory<ProjectionDbContext>>();
             services.AddScoped<IPersonProjection, PersonProjection>();
 
-            services.AddControllers();
-            services.AddSwaggerGen(c =>
-            {
-                var xmlFile = $"{Assembly.GetExecutingAssembly().GetName().Name}.xml";
-                var xmlPath = Path.Combine(AppContext.BaseDirectory, xmlFile);
-                c.IncludeXmlComments(xmlPath);
-            });
-
-            services.AddAutoMapper(x =>
-            {
-                Person.Implementation.Monolithic.MapperConfiguration.Register(x);
-                Projection.Implementation.Monolithic.MapperConfiguration.Register(x);
-            });
-        }
-
-        public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
-        {
-            if (env.IsDevelopment())
-            {
-                app.UseDeveloperExceptionPage();
-            }
-
-            app.UseSwagger();
-            app.UseSwaggerUI(c =>
-            {
-                c.SwaggerEndpoint("/swagger/v1/swagger.json", "Simple CRUD Api");
-                c.RoutePrefix = "swagger";
-            });
-
-            app.UseRouting();
-            app.UseEndpoints(endpoints =>
-            {
-                endpoints.MapControllers();
-            });
+            //Automapper
+            services.AddAutoMapper(MapperConfiguration.Register);
         }
     }
 }

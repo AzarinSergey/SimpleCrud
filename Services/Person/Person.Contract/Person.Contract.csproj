@@ -5,6 +5,7 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\..\..\.core\Core.Service.Host.Interfaces\Core.Service.Interfaces.csproj" />
     <ProjectReference Include="..\..\..\.core\Moedi.Cqrs.Messages\Moedi.Cqrs.Messages.csproj" />
   </ItemGroup>
 

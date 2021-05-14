@@ -1,5 +1,5 @@
-﻿using AutoMapper;
-using Moedi.Cqrs;
+﻿using System.Threading;
+using System.Threading.Tasks;
 using Moedi.Cqrs.Extensions;
 using Moedi.Cqrs.Messages;
 using Person.Contract;
@@ -7,22 +7,11 @@ using Person.Domain.Command;
 using Person.Domain.Event;
 using Person.Domain.Handler;
 using Person.Domain.Validator;
-using System.Threading;
-using System.Threading.Tasks;
 
-namespace Person.Implementation.Monolithic
+namespace Person.Implementation.Service
 {
-    public class PersonService : IPersonService
+    public partial class PersonService : IPersonService
     {
-        private readonly IProcessorFactory _processor;
-        private readonly IMapper _mapper;
-
-        public PersonService(IProcessorFactory processor, IMapper mapper)
-        {
-            _processor = processor;
-            _mapper = mapper;
-        }
-
         public async Task<int> CreatePerson(CreatePersonCommandModel command, CrossContext ctx, CancellationToken token)
         {
             var events = await _processor
@@ -38,7 +27,7 @@ namespace Person.Implementation.Monolithic
         {
             var domainCommand = _mapper.Map<UpdatePersonDomainCommand>(command);
             domainCommand.Id = personId;
-            
+
             var events = await _processor
                 .Command<UpdatePersonDomainCommand>(command, ctx)
                 .UseTransaction()

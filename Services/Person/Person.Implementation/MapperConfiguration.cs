@@ -3,7 +3,7 @@ using Person.Contract;
 using Person.Domain.Command;
 using Person.Domain.Event;
 
-namespace Person.Implementation.Monolithic
+namespace Person.Implementation
 {
     public class MapperConfiguration
     {

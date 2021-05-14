@@ -10,13 +10,16 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Options;
 using Newtonsoft.Json;
+using Swashbuckle.AspNetCore.Swagger;
+using Swashbuckle.AspNetCore.SwaggerGen;
+using Swashbuckle.AspNetCore.SwaggerUI;
 using System;
 
 namespace Core.Service.Host
 {
     public abstract class StatelessServiceStartup
     {
-        protected abstract Type[] ServiceContractTypes { get; }
+       protected virtual Type[] ServiceContractTypes => new Type[] { };
 
         protected StatelessServiceStartup()
         {
@@ -37,8 +40,13 @@ namespace Core.Service.Host
             services.AddHttpClient();
             services.AddSingleton<IServiceEndpointConvention, ServiceEndpointConvention>();
 
-            services.Configure<ServiceConfig>(Configuration.GetSection(ServiceConfig.SectionName));
+            services.Configure<ServiceSettings>(Configuration.GetSection(ServiceSettings.SectionName));
             services.Configure<ApplicationConfig>(Configuration.GetSection(ApplicationConfig.SectionName));
+
+            if (_addSwaggerGen != null)
+            {
+                services.AddSwaggerGen(x => _addSwaggerGen(x));
+            }
 
             services.AddControllers();
             RegisterStatelessService(services);
@@ -50,6 +58,17 @@ namespace Core.Service.Host
             {
                 app.UseDeveloperExceptionPage();
             }
+
+            if (_useSwagger != null)
+            {
+                app.UseSwagger(x => _useSwagger(app.ApplicationServices, x));
+            }
+
+            if (_useSwaggerUi != null)
+            {
+                app.UseSwaggerUI(x => _useSwaggerUi(app.ApplicationServices, x));
+            }
+
 
             app.UseRouting();
 
@@ -80,14 +99,22 @@ namespace Core.Service.Host
             var serviceEndpointConvention = app.ApplicationServices.GetRequiredService<IServiceEndpointConvention>();
 
             app.UseServiceEndpoints(ServiceContractTypes, serviceEndpointConvention);
-
-            ServiceConfiguration(app, env);
         }
 
 
-        public abstract void RegisterStatelessService(IServiceCollection c);
-        public abstract void ServiceConfiguration(IApplicationBuilder app, IWebHostEnvironment env);
-        public virtual ServiceConfig ResolveServiceConfigObject(IApplicationBuilder app)
-            => app.ApplicationServices.GetRequiredService<IOptions<ServiceConfig>>().Value;
+        protected abstract void RegisterStatelessService(IServiceCollection c);
+        protected virtual ServiceSettings ResolveServiceConfigObject(IApplicationBuilder app) => app.ApplicationServices.GetRequiredService<IOptions<ServiceSettings>>().Value;
+
+
+        //IServiceConfigurator for allowed by design services only
+        private Action<SwaggerGenOptions> _addSwaggerGen;
+        private Action<IServiceProvider, SwaggerOptions> _useSwagger;
+        private Action<IServiceProvider, SwaggerUIOptions> _useSwaggerUi;
+        protected void ConfigureSwagger(Action<SwaggerGenOptions> addSwaggerGen, Action<IServiceProvider, SwaggerOptions> useSwagger, Action<IServiceProvider, SwaggerUIOptions> useSwaggerUi)
+        {
+            _addSwaggerGen = addSwaggerGen;
+            _useSwagger = useSwagger;
+            _useSwaggerUi = useSwaggerUi;
+        }
     }
 }

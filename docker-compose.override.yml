@@ -1,0 +1,29 @@
+version: '3.4'
+
+networks:
+  somple-crud-ntw:
+    driver: bridge
+
+services:
+  api-gateway:
+    container_name: ${APP_NAME}.api-gateway
+    environment:
+      - ASPNETCORE_ENVIRONMENT=Development
+      - ConnectionStrings__SqlConnection=${SQL_CONNECTION}
+      - ApplicationConfig__ApplicationName=${APP_NAME}
+    ports:
+      - "11990:80"
+    networks:
+      somple-crud-ntw:
+
+  person-service:
+    container_name: ${APP_NAME}.person-service
+    environment:
+      - ASPNETCORE_ENVIRONMENT=Development
+      - ConnectionStrings__SqlConnection=${SQL_CONNECTION}
+      - ApplicationConfig__ApplicationName=${APP_NAME}
+    ports:
+      - "80"
+    networks:
+      somple-crud-ntw:
+
