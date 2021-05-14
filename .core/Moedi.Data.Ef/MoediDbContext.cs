@@ -57,6 +57,8 @@ namespace Moedi.Data.Ef
                     .AddJsonFile($"appsettings.{envName}.json", optional: true, reloadOnChange: true);
             }
 
+            configuration.AddEnvironmentVariables();
+
             var connectionString = configuration.Build().GetConnectionString(ConnectionName);
 
             optionsBuilder.UseSqlServer(connectionString);

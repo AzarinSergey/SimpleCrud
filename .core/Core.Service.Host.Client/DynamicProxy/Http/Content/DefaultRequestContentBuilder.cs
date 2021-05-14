@@ -6,7 +6,6 @@ using Core.Tool;
 
 namespace Core.Service.Host.Client.DynamicProxy.Http.Content
 {
-    //TODO: interface + factory
     internal class DefaultRequestContentBuilder
     {
         private readonly Type _serviceType;

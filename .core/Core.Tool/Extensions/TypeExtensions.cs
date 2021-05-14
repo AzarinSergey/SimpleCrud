@@ -31,8 +31,7 @@ namespace Core.Tool.Extensions
 
             if (IsDynamicObject(objectValue.GetType()))
             {
-                IDictionary<string, object> expandoPropertyValues = objectValue as IDictionary<string, object>;
-                return expandoPropertyValues != null;
+                return objectValue is IDictionary<string, object>;
             }
 
             return false;

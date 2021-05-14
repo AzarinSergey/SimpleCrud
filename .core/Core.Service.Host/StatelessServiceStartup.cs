@@ -1,18 +1,16 @@
 ﻿using Core.Service.Host.ApplicationBuilderExtensions;
 using Core.Service.Host.Convention.Configuration;
 using Core.Service.Host.Convention.Convention;
+using Core.Tool;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Http;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using Core.Tool;
 using Microsoft.Extensions.Options;
 using Newtonsoft.Json;
+using System;
 
 namespace Core.Service.Host
 {
@@ -65,7 +63,7 @@ namespace Core.Service.Host
 
                 endpoints.MapGet(healthPath, async context =>
                 {
-                    await context.Response.WriteAsync($"===> OK <=== \n {Tool.Tools.Json.Serializer.Serialize(context.Request.Headers)}");
+                    await context.Response.WriteAsync($"===> OK <=== \n {Tools.Json.Serializer.Serialize(context.Request.Headers)}");
                 });
 
                 endpoints.MapGet(printEnvPath, async context =>

@@ -1,5 +1,4 @@
-﻿using System.Threading;
-using Core.Service.Interfaces;
+﻿using Core.Service.Interfaces;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 
