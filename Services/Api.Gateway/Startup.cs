@@ -16,8 +16,6 @@ using System.Reflection;
 
 namespace Api.Gateway
 {
-
-
     public class Startup : StatelessServiceStartup
     {
         public Startup()
