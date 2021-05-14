@@ -1,0 +1,24 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>netcoreapp3.1</TargetFramework>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <Compile Remove="Swagger\**" />
+    <EmbeddedResource Remove="Swagger\**" />
+    <None Remove="Swagger\**" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <!-- Reference ASP.NET Core 3 dependencies -->
+    <FrameworkReference Include="Microsoft.AspNetCore.App" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\Core.Service.Host.Convention\Core.Service.Host.Convention.csproj" />
+    <ProjectReference Include="..\Core.Service.Host.ServiceDiscovery\Core.Service.Host.Client.csproj" />
+    <ProjectReference Include="..\Core.Tool\Core.Tool.csproj" />
+  </ItemGroup>
+
+</Project>
