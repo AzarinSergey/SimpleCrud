@@ -20,8 +20,6 @@
 	</PropertyGroup>
 
 	<ItemGroup>
-    <ProjectReference Include="..\..\.core\Core.Service.Host.Client\Core.Service.Host.Client.csproj" />
-    <ProjectReference Include="..\..\.core\Core.Service.Host\Core.Service.Host.csproj" />
     <ProjectReference Include="..\Person\Person.Contract\Person.Contract.csproj" />
     <ProjectReference Include="..\Person\Person.Model\Person.Model.csproj" />
     <ProjectReference Include="..\Projection\Projection.Contract\Projection.Contract.csproj" />

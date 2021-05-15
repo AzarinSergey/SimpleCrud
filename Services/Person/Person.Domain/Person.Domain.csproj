@@ -9,8 +9,6 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\..\..\.core\Moedi.Cqrs.Messages\Moedi.Cqrs.Messages.csproj" />
-    <ProjectReference Include="..\..\..\.core\Moedi.Cqrs\Moedi.Cqrs.csproj" />
     <ProjectReference Include="..\Person.Model\Person.Model.csproj" />
   </ItemGroup>
 

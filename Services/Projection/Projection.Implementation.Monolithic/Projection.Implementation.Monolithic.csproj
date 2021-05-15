@@ -9,7 +9,6 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\..\..\.core\Moedi.Cqrs\Moedi.Cqrs.csproj" />
     <ProjectReference Include="..\Projection.Contract\Projection.Contract.csproj" />
     <ProjectReference Include="..\Projection.Domain\Projection.Domain.csproj" />
   </ItemGroup>
