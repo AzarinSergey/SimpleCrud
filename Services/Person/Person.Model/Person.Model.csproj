@@ -11,4 +11,8 @@
     </PackageReference>
   </ItemGroup>
 
+  <ItemGroup>
+    <ProjectReference Include="..\..\..\.core\Moedi.Data.Ef\Moedi.Data.Ef.csproj" />
+  </ItemGroup>
+
 </Project>
