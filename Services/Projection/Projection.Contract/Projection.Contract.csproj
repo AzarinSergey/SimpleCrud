@@ -6,7 +6,6 @@
 
   <ItemGroup>
     <ProjectReference Include="..\..\..\.cmn\Cmn.Models\Cmn.Models.csproj" />
-    <ProjectReference Include="..\..\..\.core\Moedi.Cqrs.Messages\Moedi.Cqrs.Messages.csproj" />
   </ItemGroup>
 
 </Project>
