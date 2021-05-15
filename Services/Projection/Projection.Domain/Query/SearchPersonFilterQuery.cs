@@ -1,12 +1,10 @@
-﻿using System.Collections.Generic;
-using System.Linq;
-using Cmn.Models;
+﻿using Microsoft.EntityFrameworkCore;
 using Moedi.Cqrs.Handler;
 using Projection.Domain.Model;
 using Projection.Domain.SearchFilter.Implementations;
+using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
-using Microsoft.EntityFrameworkCore;
 
 namespace Projection.Domain.Query
 {

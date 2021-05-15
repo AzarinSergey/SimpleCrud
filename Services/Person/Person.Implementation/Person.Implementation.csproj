@@ -14,6 +14,7 @@
   </ItemGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\..\..\.core\Core.Service.Host\Core.Service.Host.csproj" />
     <ProjectReference Include="..\Person.Contract\Person.Contract.csproj" />
     <ProjectReference Include="..\Person.Domain\Person.Domain.csproj" />
   </ItemGroup>
