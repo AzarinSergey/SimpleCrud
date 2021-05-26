@@ -7,7 +7,6 @@ using Projection.Contract.Models;
 using Projection.Domain.Model;
 using Projection.Domain.Query;
 using System.Collections.Generic;
-using System.Threading;
 using System.Threading.Tasks;
 
 namespace Projection.Implementation.Monolithic
@@ -23,11 +22,11 @@ namespace Projection.Implementation.Monolithic
             _mapper = mapper;
         }
 
-        public async Task<PagedResult<SearchPersonResultPrj>> SearchPerson(SearchPersonFilterPrj model, CrossContext ctx, CancellationToken token)
+        public async Task<PagedResult<SearchPersonResultPrj>> SearchPerson(SearchPersonFilterPrj model, CrossContext ctx)
         {
             var filter = _mapper.Map<SearchPersonFilter>(model);
             var query = new SearchPersonFilterQuery(filter);
-            var result = await _processor.Query(ctx, token, query);
+            var result = await _processor.Query(ctx, query);
 
             return new PagedResult<SearchPersonResultPrj>(result.PageSize, result.PageNumber, result.TotalCount, 
                 _mapper.Map<List<SearchPersonResultPrj>>(result.Items));

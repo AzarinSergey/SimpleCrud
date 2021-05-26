@@ -27,10 +27,7 @@ namespace Api.Gateway
                 var xmlPath = Path.Combine(AppContext.BaseDirectory, xmlFile);
                 op.IncludeXmlComments(xmlPath);
             },
-            (sp, op) =>
-            {
-
-            },
+            null,
             (sp, op) =>
             {
                 op.SwaggerEndpoint("/swagger/v1/swagger.json", "Simple CRUD Api");

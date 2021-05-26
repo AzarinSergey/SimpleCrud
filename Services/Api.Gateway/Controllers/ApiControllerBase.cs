@@ -1,22 +1,22 @@
-﻿using System;
+﻿using Core.Service.Host;
+using Core.Service.Host.Convention.Configuration;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
-using Moedi.Cqrs.Messages;
+using Microsoft.Extensions.Options;
 
 namespace Api.Gateway.Controllers
 {
     [Route("api/[controller]/[action]")]
     [ApiController]
-    public abstract class ApiControllerBase : ControllerBase
+    public abstract class ApiControllerBase : AbstractController
     {
-        protected readonly ILogger<ApiControllerBase> Logger;
+        private readonly string _serviceUuid;
 
-        private CrossContext _ctx;
-        protected CrossContext CrossContext => _ctx ??= new CrossContext { CorrelationUuid = Guid.NewGuid() };
-
-        protected ApiControllerBase(ILogger<ApiControllerBase> logger)
+        protected ApiControllerBase(ILogger<ApiControllerBase> logger, IOptions<ServiceSettings> settings) : base(logger)
         {
-            Logger = logger;
+            _serviceUuid = settings.Value.ServiceName;
         }
+
+        protected override string ServiceUuid => _serviceUuid;
     }
 }
