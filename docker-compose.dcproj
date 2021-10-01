@@ -9,11 +9,19 @@
     <DockerServiceName>api.gateway</DockerServiceName>
   </PropertyGroup>
   <ItemGroup>
+    <None Include=".build\on_local_build_script.ps1" />
+    <None Include=".build\run_integration_tests.ps1" />
+    <None Include=".build\run_unit_tests.ps1" />
     <None Include=".env" />
+    <None Include=".tests\gis-integration-tests.yml" />
+    <None Include=".tests\api.gateway-integration-tests.yml" />
     <None Include="docker-compose.override.yml">
       <DependentUpon>docker-compose.yml</DependentUpon>
     </None>
     <None Include="docker-compose.yml" />
     <None Include=".dockerignore" />
   </ItemGroup>
+  <Target Name="CreateDockerNetwork" BeforeTargets="PrepareForBuild" Condition=" '$(Configuration)' == 'Debug' ">
+    <Exec Command="Powershell.exe -file &quot;$(SolutionDir).build\on_local_build_script.ps1&quot;" />
+  </Target>
 </Project>

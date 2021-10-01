@@ -1,12 +1,13 @@
 version: '3.4'
 
 networks:
-  somple-crud-ntw:
+  simple-crud-ntw:
+    external: true
     driver: bridge
 
 services:
   api-gateway:
-    container_name: ${APP_NAME}.api-gateway
+    container_name: ${APP_NAME}.${API_GATEWAY_SERVICE_NAME}
     environment:
       - ASPNETCORE_ENVIRONMENT=Development
       - ConnectionStrings__SqlConnection=${SQL_CONNECTION}
@@ -14,10 +15,10 @@ services:
     ports:
       - "11990:80"
     networks:
-      somple-crud-ntw:
+      simple-crud-ntw:
 
-  person-service:
-    container_name: ${APP_NAME}.person-service
+  Gis-service:
+    container_name: ${APP_NAME}.${GIS_SERVICE_NAME}
     environment:
       - ASPNETCORE_ENVIRONMENT=Development
       - ConnectionStrings__SqlConnection=${SQL_CONNECTION}
@@ -25,5 +26,4 @@ services:
     ports:
       - "80"
     networks:
-      somple-crud-ntw:
-
+      simple-crud-ntw:

@@ -2,18 +2,17 @@ version: '3.4'
 
 services:
   api-gateway:
-    image: ${DOCKER_REGISTRY-}${APP_NAME}.api-gateway
+    image: ${DOCKER_REGISTRY-}${APP_NAME}.${API_GATEWAY_SERVICE_NAME}
     build:
       context: .
-      dockerfile: Services/Api.Gateway/Dockerfile
+      dockerfile: Services/Api.Gateway/Api.Gateway/Dockerfile
       labels:
         - app.name=${APP_NAME}
 
-  person-service:
-    image: ${DOCKER_REGISTRY-}${APP_NAME}.person-service
+  Gis-service:
+    image: ${DOCKER_REGISTRY-}${APP_NAME}.${GIS_SERVICE_NAME}
     build:
       context: .
-      dockerfile: Services/Person/Person.Implementation/Dockerfile
+      dockerfile: Services/Gis/Gis.Implementation/Dockerfile
       labels:
         - app.name=${APP_NAME}
-

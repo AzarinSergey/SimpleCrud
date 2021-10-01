@@ -1,0 +1,10 @@
+{
+  "profiles": {
+    "Api.Gateway.Test.Integration": {
+      "commandName": "Project"
+    },
+    "Docker": {
+      "commandName": "Docker"
+    }
+  }
+}

@@ -1,0 +1,23 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>netcoreapp3.1</TargetFramework>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="FluentValidation" Version="10.1.0" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\..\..\.core\Moedi.Cqrs\Moedi.Cqrs.csproj" />
+    <ProjectReference Include="..\Gis.Model\Gis.Model.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Folder Include="Command\" />
+    <Folder Include="Event\" />
+    <Folder Include="Handler\" />
+    <Folder Include="Validator\" />
+  </ItemGroup>
+
+</Project>
