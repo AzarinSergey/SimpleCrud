@@ -20,6 +20,7 @@
     </None>
     <None Include="docker-compose.yml" />
     <None Include=".dockerignore" />
+    <None Include="README.md" />
   </ItemGroup>
   <Target Name="CreateDockerNetwork" BeforeTargets="PrepareForBuild" Condition=" '$(Configuration)' == 'Debug' ">
     <Exec Command="Powershell.exe -file &quot;$(SolutionDir).build\on_local_build_script.ps1&quot;" />
