@@ -5,8 +5,7 @@ using Moedi.Cqrs;
 using System;
 using System.Threading;
 using System.Threading.Tasks;
-using Gis.Contract;
-using Moedi.Cqrs.Messages;
+using Moedi.Data.Core.Access;
 
 namespace Gis.Implementation.Service
 {
@@ -14,12 +13,14 @@ namespace Gis.Implementation.Service
     {
         private readonly IProcessorFactory _processor;
         private readonly IMapper _mapper;
+        private readonly IUowFactory _uowFactory;
         private readonly ILogger<GisService> _logger;
 
-        public GisService(IProcessorFactory processor, IMapper mapper, ILogger<GisService> logger)
+        public GisService(IProcessorFactory processor, IMapper mapper, IUowFactory uowFactory, ILogger<GisService> logger)
         {
             _processor = processor;
             _mapper = mapper;
+            _uowFactory = uowFactory;
             _logger = logger;
         }
 

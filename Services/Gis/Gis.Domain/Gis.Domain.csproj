@@ -9,15 +9,13 @@
   </ItemGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\..\..\.core\Core.Tool\Core.Tool.csproj" />
     <ProjectReference Include="..\..\..\.core\Moedi.Cqrs\Moedi.Cqrs.csproj" />
     <ProjectReference Include="..\Gis.Model\Gis.Model.csproj" />
   </ItemGroup>
 
   <ItemGroup>
-    <Folder Include="Command\" />
     <Folder Include="Event\" />
-    <Folder Include="Handler\" />
-    <Folder Include="Validator\" />
   </ItemGroup>
 
 </Project>

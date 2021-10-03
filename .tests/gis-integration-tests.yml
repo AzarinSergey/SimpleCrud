@@ -6,15 +6,62 @@ networks:
     driver: bridge
 
 services:
-  api-gateway-integration-tests:
+  gis-service-integration-tests:
     image: ${DOCKER_REGISTRY-}${APP_NAME}.${GIS_SERVICE_NAME}-integration-tests
     build:
-      context: ../Services/Gis/Gis.Test.Integration
-      dockerfile: Dockerfile
+      context: ../
+      dockerfile: ./Services/Gis/Gis.Test.Integration/Dockerfile
       labels:
         - app.name=${APP_NAME}  
     container_name: ${APP_NAME}.${GIS_SERVICE_NAME}-integration-tests
     environment:
-      - TestConfig__ServiceHost=http://${GIS_SERVICE_NAME}
+      - TestConfig__ServiceHost=http://${APP_NAME}-${GIS_SERVICE_NAME}-test-instance
+      - ConnectionStrings__SqlConnection=host=simple-crud-postgres-integration-tests;Port=5432;database=simple_crud;user id=simple_crud_user;Password=password;Command Timeout=0
+    volumes:
+      - ./../.build/integration-tests:/wait-script
+    command:
+        [
+        "/wait-script/wait-for-it.sh",
+        "simple-crud-postgres-integration-tests:5432",
+        "--",
+        "dotnet",
+        "test",
+        "/app/Services/Gis/Gis.Test.Integration/Gis.Test.Integration.csproj"
+        ]
+    networks:
+      simple-crud-ntw:
+
+  sc-gis-service-test-instance:
+    image: ${DOCKER_REGISTRY-}${APP_NAME}.${GIS_SERVICE_NAME}
+    build:
+      context: ../
+      dockerfile: Services/Gis/Gis.Implementation/Dockerfile
+      labels:
+        - app.name=${APP_NAME} 
+    container_name: ${APP_NAME}-${GIS_SERVICE_NAME}-test-instance
+    environment:
+      - ASPNETCORE_ENVIRONMENT=Development
+      - ConnectionStrings__SqlConnection=host=simple-crud-postgres-integration-tests;Port=5432;database=simple_crud;user id=simple_crud_user;Password=password;Command Timeout=0
+      - ApplicationConfig__ApplicationName=${APP_NAME}
+    ports:
+      - "80"
+    networks:
+      simple-crud-ntw:
+
+  sc-postgres-integration-tests:
+    image: postgres:11
+    container_name: ${APP_NAME}-postgres-integration-tests
+    environment:
+      POSTGRES_USER: ${POSTGRES_ADMIN_USER}
+      POSTGRES_PASSWORD: ${POSTGRES_ADMIN_PASSWORD}
+      POSTGRES_USER_NAME: ${POSTGRES_USER_NAME}
+      POSTGRES_USER_PASSWORD: ${POSTGRES_USER_PASSWORD}
+      POSTGRES_USER_DB: ${POSTGRES_USER_DB}
+      PGUSER: ${POSTGRES_ADMIN_USER}
+      PGPASSWORD: ${POSTGRES_ADMIN_PASSWORD}
+      PGDATABASE: ${POSTGRES_USER_DB}
+    volumes:
+      - ./../.build/postgres/bash:/docker-entrypoint-initdb.d:rw
+    restart: unless-stopped
     networks:
       simple-crud-ntw:

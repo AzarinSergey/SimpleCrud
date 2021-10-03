@@ -1,6 +1,6 @@
-using System.Net.Http;
 using Microsoft.Extensions.Configuration;
 using NUnit.Framework;
+using System.Net.Http;
 
 namespace Gis.Test.Integration
 {

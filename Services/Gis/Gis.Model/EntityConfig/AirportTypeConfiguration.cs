@@ -8,7 +8,7 @@ namespace Gis.Model.EntityConfig
     {
         public void Configure(EntityTypeBuilder<Airport> builder)
         {
-            builder.ToTable("Gis");
+            builder.ToTable("Airport");
         }
     }
 }

@@ -12,12 +12,15 @@
     <PackageReference Include="AutoMapper.Extensions.Microsoft.DependencyInjection" Version="8.1.1" />
     <PackageReference Include="Microsoft.EntityFrameworkCore" Version="5.0.6" />
     <PackageReference Include="Microsoft.VisualStudio.Azure.Containers.Tools.Targets" Version="1.10.13" />
+    <PackageReference Include="Npgsql.EntityFrameworkCore.PostgreSQL" Version="5.0.6" />
   </ItemGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\..\..\.core\Core.Service.Host.Client\Core.Service.Host.Client.csproj" />
     <ProjectReference Include="..\..\..\.core\Core.Service.Host\Core.Service.Host.csproj" />
     <ProjectReference Include="..\..\..\.core\Moedi.Cqrs\Moedi.Cqrs.csproj" />
     <ProjectReference Include="..\Gis.Contract\Gis.Contract.csproj" />
+    <ProjectReference Include="..\Gis.Domain\Gis.Domain.csproj" />
     <ProjectReference Include="..\Gis.Model\Gis.Model.csproj" />
   </ItemGroup>
 

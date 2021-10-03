@@ -6,8 +6,8 @@ networks:
     driver: bridge
 
 services:
-  api-gateway:
-    container_name: ${APP_NAME}.${API_GATEWAY_SERVICE_NAME}
+  sc-api-gateway:
+    container_name: ${APP_NAME}-${API_GATEWAY_SERVICE_NAME}
     environment:
       - ASPNETCORE_ENVIRONMENT=Development
       - ConnectionStrings__SqlConnection=${SQL_CONNECTION}
@@ -17,8 +17,8 @@ services:
     networks:
       simple-crud-ntw:
 
-  Gis-service:
-    container_name: ${APP_NAME}.${GIS_SERVICE_NAME}
+  sc-gis-service:
+    container_name: ${APP_NAME}-${GIS_SERVICE_NAME}
     environment:
       - ASPNETCORE_ENVIRONMENT=Development
       - ConnectionStrings__SqlConnection=${SQL_CONNECTION}

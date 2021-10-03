@@ -1,0 +1,46 @@
+version: '3.4'
+
+networks:
+  simple-crud-ntw:
+    external: true
+    driver: bridge
+
+services:
+  api-gateway-integration-tests:
+    image: ${DOCKER_REGISTRY-}${APP_NAME}.${API_GATEWAY_SERVICE_NAME}-integration-tests
+    build:
+      context: ../Services/Api.Gateway/Api.Gateway.Test.Integration
+      dockerfile: Dockerfile
+      labels:
+        - app.name=${APP_NAME}  
+    container_name: ${APP_NAME}.${API_GATEWAY_SERVICE_NAME}-integration-tests
+    environment:
+      - TestConfig__ServiceHost=http://${APP_NAME}-${API_GATEWAY_SERVICE_NAME}-test-instance
+    volumes:
+      - ./../.build/integration-tests:/wait-script
+    command:
+        [
+        "/wait-script/wait-for-it.sh",
+        "${APP_NAME}-${API_GATEWAY_SERVICE_NAME}-test-instance:80",
+        "--",
+        "dotnet",
+        "test",
+        "/app/Api.Gateway.Test.Integration.csproj"
+        ]
+    networks:
+      simple-crud-ntw:
+
+  sc-api-gateway-test-instance:
+    image: ${DOCKER_REGISTRY-}${APP_NAME}.${API_GATEWAY_SERVICE_NAME}-test-instance
+    build:
+      context: ../
+      dockerfile: Services/Api.Gateway/Api.Gateway/Dockerfile
+      labels:
+        - app.name=${APP_NAME}
+    container_name: ${APP_NAME}-${API_GATEWAY_SERVICE_NAME}-test-instance
+    environment:
+      - ASPNETCORE_ENVIRONMENT=Development
+      - ConnectionStrings__SqlConnection=${SQL_CONNECTION}
+      - ApplicationConfig__ApplicationName=${APP_NAME}
+    networks:
+      simple-crud-ntw:

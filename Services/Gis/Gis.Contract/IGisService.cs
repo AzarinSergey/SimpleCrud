@@ -6,6 +6,6 @@ namespace Gis.Contract
 {
     public interface IGisService : IInternalHttpService
     {
-        Task<decimal> GetDistance(GetDistanceModel model, CrossContext ctx);
+        Task<double> GetDistance(GetDistanceModel model, CrossContext ctx);
     }
 }

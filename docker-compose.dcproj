@@ -9,12 +9,15 @@
     <DockerServiceName>api.gateway</DockerServiceName>
   </PropertyGroup>
   <ItemGroup>
+    <None Include=".build\integration-tests\wait-for-it.sh" />
     <None Include=".build\on_local_build_script.ps1" />
+    <None Include=".build\postgres\bash\server_config.sh" />
     <None Include=".build\run_integration_tests.ps1" />
     <None Include=".build\run_unit_tests.ps1" />
     <None Include=".env" />
     <None Include=".tests\gis-integration-tests.yml" />
-    <None Include=".tests\api.gateway-integration-tests.yml" />
+    <None Include=".tests\api-gateway-integration-tests.yml" />
+    <None Include="docker-compose-infrastructure.yml" />
     <None Include="docker-compose.override.yml">
       <DependentUpon>docker-compose.yml</DependentUpon>
     </None>

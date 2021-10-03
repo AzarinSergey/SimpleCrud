@@ -1,4 +1,9 @@
-﻿using Core.Service.Host.Convention.Configuration;
+﻿using System.Threading;
+using System.Threading.Tasks;
+using Core.Service.Host.Client.DynamicProxy;
+using Core.Service.Host.Convention.Configuration;
+using Gis.Contract;
+using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
 using Microsoft.Extensions.Options;
 
@@ -6,43 +11,37 @@ namespace Api.Gateway.Controllers
 {
     public class GisController : ApiControllerBase
     {
+        private readonly ServiceProxy<IGisService> _gisService;
+
         public GisController(ILogger<GisController> logger, 
-            IOptions<ServiceSettings> settings) 
+            IOptions<ServiceSettings> settings,
+            ServiceProxy<IGisService> gisService) 
             : base(logger, settings)
         {
-            
+            _gisService = gisService;
         }
 
         /// <summary>
-        /// Фильтр по сущностям. 
+        /// Получить расстояние между аэропортами
         /// </summary>
         /// <remarks>
-        /// Пример модели запроса делает следующее:
-        /// Выбирает все сущности у которых zipCode равен 48601,
-        /// сортирует в обратном порядке по firstName, затем по phone
-        /// и возвращает первую страницу из пяти сущностей.
-        /// Чтобы обратить порядок сортировки нужно стереть "desc" из свойства фильтра sortBy.
-        ///
-        ///     POST /filter
-        ///     {
-        ///         "pageNumber": 1,
-        ///         "pageSize": 5,
-        ///         "sortBy": "firstName, phone desc",
-        ///         "firstName": null,
-        ///         "city": null,
-        ///         "zipCode": "48601",
-        ///         "phone": null
-        ///     }
-        ///
+        /// Ремарка
         /// </remarks>
-        /// <param name="filter"></param>
-        /// <param name="token"></param>
-        /// <returns>Результат работы фильтра</returns>
-        //[HttpPost]
-        //public async Task<IActionResult> Filter(SearchGisFilterPrj filter, CancellationToken token)
-        //{
-        //    var result = await _GisProjection.SearchGis(filter, CrossContext(token));
-        //    return Ok(result);
-        //}
+        /// <param name="a">Код аэропорта</param>
+        /// <param name="b">Код аэропорта</param>
+        /// <param name="token">Токен отмены</param>
+        /// <returns>Расстояние в милях</returns>
+        [HttpGet("/distance/{a}/{b}")]
+        public async Task<IActionResult> GetDistance(string a, string b, CancellationToken token)
+        {
+            var result = await _gisService.Call()
+                .GetDistance(new GetDistanceModel
+                {
+                    AirportCodeA = a,
+                    AirportCodeB = b
+                }, CrossContext(token));
+
+            return Ok(result);
+        }
     }
 }

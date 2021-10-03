@@ -1,7 +1,7 @@
 version: '3.4'
 
 services:
-  api-gateway:
+  sc-api-gateway:
     image: ${DOCKER_REGISTRY-}${APP_NAME}.${API_GATEWAY_SERVICE_NAME}
     build:
       context: .
@@ -9,7 +9,7 @@ services:
       labels:
         - app.name=${APP_NAME}
 
-  Gis-service:
+  sc-gis-service:
     image: ${DOCKER_REGISTRY-}${APP_NAME}.${GIS_SERVICE_NAME}
     build:
       context: .
