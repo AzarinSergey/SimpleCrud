@@ -10,7 +10,7 @@ using System.Threading;
 
 namespace Gis.Test.Unit
 {
-    public class GisDataProvider_GetAirportPositionTests
+    public class GisDataProviderGetAirportPositionTests
     {
         private ILogger<GisDataProvider> _logger;
 
