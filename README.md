@@ -32,8 +32,6 @@ Solution Explorer -> docker-compose(.dcproj) -> right click -> Set as StarUp pro
 *Это гит у винды меняет знаки окончания строки в .sh файлах, а они потом не выполняются внутри контейнера из-за этого. Фиксим так:*
 ![fix-line-endings.png](docs/fix-line-endings.png)
 
-Используйте сваггер: http://localhost:11990/swagger/
-
 ### 4. Запускаем юнит тесты
 ```.\.build\run_unit_tests.ps1```
 
