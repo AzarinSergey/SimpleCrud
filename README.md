@@ -1,7 +1,8 @@
 ﻿# SimpleCrud
 
 Ваша ветка Tropelet
-Обязательно наличие docker, docker-compose, .net core sdk 3.1
+
+Обязательно наличие установленных: docker, docker-compose, .net core sdk 3.1
 
 Все команды выполнять из папки с файлом .sln
 
